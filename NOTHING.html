@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДЕНЬ РОЖДЕНИЯ ЧЕЙ ТО ХЗ ЧЕСТНО ЧЕЙ ИМЕННО</title>
+    <style>
+        body {
+            background-color: #ff00ff;
+            color: #00ff00;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #00ffff;
+        }
+
+        .option {
+            background-color: #ffff00;
+            margin: 20px auto;
+            padding: 20px;
+            border: 5px solid #ff0000;
+            font-size: 2em;
+            width: 50%;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background-color: #00ffff;
+            color: #ff0000;
+        }
+
+        .video-buttons {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .video-button {
+            background-color: #ff00ff;
+            color: #ffff00;
+            border: 3px solid #00ff00;
+            padding: 10px;
+            font-size: 1.5em;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .video-button:hover {
+            background-color: #00ff00;
+            color: #ff00ff;
+        }
+
+        #teleprompter {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-size: 2em;
+            display: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        #scrolling-text {
+            position: absolute;
+            white-space: nowrap;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>САЙТИК др ПОЗДРАВЛЯТОР</h1>
+
+    <div class="option" onclick="startTeleprompter()">Опция 1: ТЕКСТ ЧИТАТЬ</div>
+    <div class="option" onclick="showVideoOptions()">Опция 2: ВИДЕО СМОТРЕТЬ (2 ШТУКА)</div>
+    <div class="option" onclick="openLink()">Опция 3: Открыть ВИДЕО НОМЕР 3 (последним)</div>
+
+    <div class="video-buttons" id="video-buttons">
+        <div class="video-button" onclick="showVideo(1)">Видео 1</div>
+        <div class="video-button" onclick="showVideo(2)">Видео 2</div>
+    </div>
+
+    <div id="teleprompter" onclick="stopTeleprompter()">
+        <div id="scrolling-text" style="text-align: center;">
+            <p>Тебя я поздравляю, Карандаш,</p>
+            <p>Ты в колледже плывёшь, не зная преград!</p>
+            <p>Ты смешной, добрый, чуть Силли, — это факт,</p>
+            <p>Но с тобой в жизни нету недопонятий и драк.</p>
+
+            <p>Ты — сигма, не скрываешь свою мощь,</p>
+            <p>Учёба с тобой — не холодная ночь.</p>
+            <p>Ты всегда светишь, даёшь всем тепла,</p>
+            <p>И даже в шалостях твоя доброта велика.</p>
+
+            <p>Желаю успехов, огромных побед,</p>
+            <p>Чтоб знаний поток был как вечный свет.</p>
+            <p>Ценю тебя, люблю, радуюсь всегда,</p>
+            <p>С днём рождения, друг! Удачи, чемпион!</p>
+        </div>
+    </div>
+
+    <video id="video1" controls>
+        <source src="video1.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+
+    <video id="video2" controls>
+        <source src="video2.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+
+    <script>
+        function startTeleprompter() {
+            const teleprompter = document.getElementById("teleprompter");
+            const scrollingText = document.getElementById("scrolling-text");
+
+            teleprompter.style.display = "block";
+            let scrollPos = teleprompter.offsetHeight;
+
+            function scrollText() {
+                scrollPos -= 1.5
+                if (scrollPos < -scrollingText.offsetHeight) {
+                    scrollPos = teleprompter.offsetHeight;
+                }
+                scrollingText.style.top = scrollPos + "px";
+                requestAnimationFrame(scrollText);
+            }
+
+            scrollText();
+        }
+
+        function stopTeleprompter() {
+            document.getElementById("teleprompter").style.display = "none";
+        }
+
+        function showVideoOptions() {
+            document.getElementById("video-buttons").style.display = "block";
+        }
+
+        function showVideo(videoNum) {
+            document.getElementById("video-buttons").style.display = "none";
+            document.getElementById("video1").style.display = "none";
+            document.getElementById("video2").style.display = "none";
+            document.getElementById(`video${videoNum}`).style.display = "block";
+        }
+
+        function openLink() {
+            window.open('https://youtu.be/M6P3Xc9fBvY?si=0RC34Wle-UZGQ3Ps', '_blank');
+        }
+    </script>
+</body>
+</html>
